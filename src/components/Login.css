@@ -1,0 +1,29 @@
+body, html {
+    height: 100%; 
+    margin: 0; 
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+.login-form {
+    width: 300px;
+    padding: 2em;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.login-title {
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    padding-top: 10%; 
+    padding-bottom: 1rem; 
+}
+
+
+
+

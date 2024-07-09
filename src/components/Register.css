@@ -1,0 +1,23 @@
+.register-container {    
+    width: 100%;
+    max-width: 700px; 
+    margin: auto;
+    margin-top: 20%;
+    padding: 30px; 
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.register-title {
+    margin-left: 50%; 
+    padding-bottom: 1rem; 
+}
+
+.register-link {
+    margin-left: 1rem; 
+}
+
+.login-link {
+    margin-left: 1rem; 
+}

@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+* {
+    margin: 0;
+    font-family: "Reddit Mono", monospace; 
+}
+
+img {
+    width: 260px;
+    height: 340px; 
+    border-radius: 5px;
+}
+
+button {
+    background: transparent;
+    border: none; 
+}
+
+.card-container {
+    display: flex; 
+    padding: 3rem;
+    align-items: center;
+    gap: 2rem; 
+    margin-right: auto; 
+    margin-left: auto; 
+    max-width: 1220px;
+    margin-bottom: 2.4rem;
+}
+
+.location {
+    display: flex; 
+    margin-bottom: .5rem; 
+}
+
+#googleMapsUrl {
+    padding-left: 1rem; 
+    color: #918E9B; 
+}
+
+.title {
+    margin-bottom: 1rem;
+
+}
+
+.date {
+    margin-bottom: .8rem;
+}
+
+#edit {
+    color: gray; 
+    margin-left: auto; 
+    padding-right: 2rem; 
+}
+
+
+
+
