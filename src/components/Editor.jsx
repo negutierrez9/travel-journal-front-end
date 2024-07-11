@@ -1,10 +1,17 @@
-import React from "react"
+import React from "react"; 
+import Nav from './Nav.jsx'
+import Form from './Form.jsx'
 
 function Editor(props) {
+    const addEntry = () => {
+        console.log('Added Entry!')
+    }
+
     return (
-        <div className="editor">
-            <button id="addEntry">Add New Entry</button>
-        </div>
+        <>
+            <Nav />
+            <Form />
+        </>
     )
 }
 

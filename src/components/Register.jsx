@@ -132,7 +132,7 @@ const Register = () => {
         <Button onClick={()=> handleRegisterClick()} type="primary" htmlType="submit">
           Register
         </Button>
-        <Link to='/login' className='login-link'>Already have an account?</Link>
+        <Link to='/' className='login-link'>Already have an account?</Link>
       </Form.Item>
     </Form>
     </div>

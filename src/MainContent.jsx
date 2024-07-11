@@ -3,6 +3,7 @@ import data from './data'
 import Card from './components/Card'
 import Nav from './components/Nav'
 import './MainContent.css'
+import { Link } from "react-router-dom";
 
 export default function MainContent() {
     const dataSet = data.map(item => {
@@ -16,15 +17,15 @@ export default function MainContent() {
             description={item.description}
             imgUrl={item.imgUrl}
         />
-    })
+    });
 
     return (
         <>
             <Nav />
             <div>
                 {dataSet}
-                <button id="addEntry">Add New Entry</button>
+                <Link to="/editor" id="addEntry">Add New Entry</Link>
             </div>
         </>
     )
-}
+};
