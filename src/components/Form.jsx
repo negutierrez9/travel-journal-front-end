@@ -6,9 +6,9 @@ import {
     Space,
     DatePicker
   } from "antd";
-  
+
   const layout = {
-    labelCol: { span: 8 },
+    labelCol: { span: 5 },
     wrapperCol: { span: 16 }
   };
   const tailLayout = {
@@ -47,27 +47,38 @@ import {
           <Input />
         </Form.Item>
 
-        <Form.Item label="Location" rules={[{ required: true }]}>
-          <Space>
-            <Form.Item
-              name="name"
-              noStyle
-              rules={[{ required: true, message: "location is required" }]}
-            >
-              <Input style={{ width: 200 }} placeholder="Please input" />
-            </Form.Item>
-          </Space>
+        <Form.Item
+          name="Location"
+          label="Location"
+          rules={[{ required: true, message: "Location is required" }]}
+        >
+          <Input style={{ width: 200 }} />
         </Form.Item>
 
         <Form.Item 
-            name="date-picker"
+            name="startDate"
             label="Start Date"
             rules={[{ required: true, message: "Start Date is required" }]}
         >
           <DatePicker />
         </Form.Item>
+
+        <Form.Item 
+            name="endDate"
+            label="End Date"
+        >
+          <DatePicker />
+        </Form.Item>
+
+        <Form.Item name="description" label="Description">
+          <Input placeholder="What did you do here?"/>
+        </Form.Item>
   
         <Form.Item name="googleMapsUrl" label="Google Maps Link">
+          <Input />
+        </Form.Item>
+
+        <Form.Item name="imgUrl" label="Image Link">
           <Input />
         </Form.Item>
   
