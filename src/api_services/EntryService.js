@@ -12,8 +12,6 @@ export const addEntry = async (body) => {
     });
 
     const data = await response.json(); 
-
+    console.log(`data`, data)
     return data; 
 }
-
-// next: test if addEntry function works on Editor or Form front end
