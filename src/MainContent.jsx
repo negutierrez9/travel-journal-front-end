@@ -1,23 +1,34 @@
-import React from 'react'
-import data from './data'
+import { React, useEffect, useState } from 'react'
 import Card from './components/Card'
 import Nav from './components/Nav'
+import { getUserEntries } from './api_services/EntryService'
 import './MainContent.css'
 import { Link } from "react-router-dom";
 
 export default function MainContent() {
-    const dataSet = data.map(item => {
+    const [entries, setEntries] = useState([]); 
+
+    useEffect(() => {
+        const fetchEntries = async () => {
+            const fetchedEntries = await getUserEntries(); 
+            setEntries(fetchedEntries); 
+        }
+
+        fetchEntries(); 
+    }, []);
+
+    const dataSet = entries.data ? entries.data.map(item => {
         return <Card 
             key={item.title}
             title={item.title}
             location={item.location}
             googleMapsUrl={item.googleMapsUrl}
-            startDate={item.startDate}
-            endDate={item.endDate}
+            startDate={item.startDate.split('T')[0]}
+            endDate={item.endDate.split('T')[0]}
             description={item.description}
             imgUrl={item.imgUrl}
         />
-    });
+    }) : null;
 
     return (
         <>

@@ -20,7 +20,6 @@ const Login = () => {
 
   const handleLoginClick = async () => {
     const { jwt, success } = await login({ username, password }); 
-    console.log()
 
     if (success) {
       localStorage.setItem('travel-journal-jwt', jwt);

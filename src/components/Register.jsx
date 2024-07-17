@@ -130,7 +130,7 @@ const Register = () => {
 
       <Form.Item {...tailFormItemLayout}>
         <Button onClick={()=> handleRegisterClick()} type="primary" htmlType="submit">
-          Register
+        <Link to='/'>Register</Link>
         </Button>
         <Link to='/' className='login-link'>Already have an account?</Link>
       </Form.Item>

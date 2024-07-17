@@ -12,6 +12,19 @@ export const addEntry = async (body) => {
     });
 
     const data = await response.json(); 
-    console.log(`data`, data)
+    console.log('data', data)
+    return data; 
+}
+
+export const getUserEntries = async () => {
+    const response = await fetch(`${API_URL}/home`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${getJwt()}`
+        } 
+    });
+
+    const data = await response.json(); 
+
     return data; 
 }

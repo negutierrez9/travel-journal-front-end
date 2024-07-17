@@ -1,5 +1,6 @@
 import { format } from 'date-fns'; 
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 import {
     Form,
     Input,
@@ -112,14 +113,14 @@ export default function Demo() {
       </Form.Item>
 
       <Form.Item {...tailLayout}>
-        <Space>
           <Button type="primary" htmlType="submit" onClick={handleAddEntry}>
-            Submit
+          <Link to='/home'>Submit</Link>
           </Button>
-          <Button htmlType="button" onClick={onReset}>
-            Reset
-          </Button>
-        </Space>
+      </Form.Item>
+      <Form.Item {...tailLayout}>
+        <Button htmlType="button" onClick={onReset}>
+          Reset
+        </Button>
       </Form.Item>
     </Form>
   );
