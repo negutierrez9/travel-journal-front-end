@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from 'react'
 import Card from './components/Card'
 import Nav from './components/Nav'
-import { getUserEntries } from './api_services/EntryService'
+import { getUserEntries, deleteEntry, editEntry } from './api_services/EntryService'
 import './MainContent.css'
 import { Link } from "react-router-dom";
 
@@ -9,17 +9,30 @@ export default function MainContent() {
     const [entries, setEntries] = useState([]); 
 
     useEffect(() => {
-        const fetchEntries = async () => {
-            const fetchedEntries = await getUserEntries(); 
-            setEntries(fetchedEntries); 
-        }
-
         fetchEntries(); 
     }, []);
 
+    const fetchEntries = async () => {
+        const fetchedEntries = await getUserEntries(); 
+        setEntries(fetchedEntries); 
+    }
+
+    const handleDeleteEntry = async (entryId) => {
+        await deleteEntry(entryId); 
+
+        fetchEntries(); 
+    }
+
+    const handleEditEntry = async (entryId) => {
+        await editEntry(entryId); 
+
+        fetchEntries(); 
+    }
+
     const dataSet = entries.data ? entries.data.map(item => {
         return <Card 
-            key={item.title}
+            key={item.id}
+            id={item.id}
             title={item.title}
             location={item.location}
             googleMapsUrl={item.googleMapsUrl}
@@ -27,6 +40,8 @@ export default function MainContent() {
             endDate={item.endDate.split('T')[0]}
             description={item.description}
             imgUrl={item.imgUrl}
+            onDelete={handleDeleteEntry}
+            onEdit={handleEditEntry}
         />
     }) : null;
 

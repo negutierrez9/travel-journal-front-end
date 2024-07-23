@@ -5,7 +5,6 @@ import {
     Form,
     Input,
     Button,
-    Space,
     DatePicker
   } from "antd";
 import { addEntry } from "../api_services/EntryService";
@@ -36,7 +35,9 @@ export default function Demo() {
       newDescription,
       newGoogleMapsUrl,
       newImgUrl
-    })
+    }); 
+
+    // fetch cars here? 
   };
 
   const [form] = Form.useForm();
@@ -47,6 +48,7 @@ export default function Demo() {
 
   const onFinish = (values) => {
     console.log("Success:", values);
+    // fetch cars here? 
   };
 
   const onFinishFailed = (errorInfo) => {

@@ -3,7 +3,12 @@ import './Card.css'
 import 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js'
 import 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js'
 
+
 export default function Card(props) {
+    const handleDeleteEntry = async () => {
+        await props.onDelete(props.id)
+    }
+
     return (
         <div className="card-container">
             <div className="photo-container">
@@ -14,7 +19,8 @@ export default function Card(props) {
                     <ion-icon name="location"></ion-icon>
                     <h3 id="location">{props.location}</h3>
                     <a href={props.googleMapsUrl} id="googleMapsUrl">View on Google Maps</a>
-                    <button id="edit">
+                    {/*Up next: call editEntry endpoint onto front end, change edit button to open edit menu with delete/save option */}
+                    <button onClick={handleDeleteEntry} id="edit">
                         <ion-icon name="create-outline"></ion-icon>
                     </button>
                 </div>
