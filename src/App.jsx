@@ -2,6 +2,7 @@ import React from 'react'
 import MainContent from './MainContent'
 import Login from './components/Login'
 import Register from './components/Register'
+import NewEntry from './components/NewEntry'
 import Editor from './components/Editor'
 
 import {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/home" element={<MainContent />}></Route>
           <Route path="/" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
+          <Route path="/addEntry" element={<NewEntry />}></Route>
           <Route path="/editor" element={<Editor />}></Route>
         </Routes>
       </BrowserRouter>

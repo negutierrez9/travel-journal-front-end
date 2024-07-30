@@ -2,12 +2,18 @@ import React from 'react'
 import './Card.css'
 import 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js'
 import 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js'
-
+import { useNavigate } from 'react-router-dom';
 
 export default function Card(props) {
     const handleDeleteEntry = async () => {
         await props.onDelete(props.id)
     }
+
+    const handleEditEntry = async () => {
+        await props.onEdit(props.id)
+    }
+
+    const navigate = useNavigate(); 
 
     return (
         <div className="card-container">
@@ -19,8 +25,7 @@ export default function Card(props) {
                     <ion-icon name="location"></ion-icon>
                     <h3 id="location">{props.location}</h3>
                     <a href={props.googleMapsUrl} id="googleMapsUrl">View on Google Maps</a>
-                    {/*Up next: call editEntry endpoint onto front end, change edit button to open edit menu with delete/save option */}
-                    <button onClick={handleDeleteEntry} id="edit">
+                    <button onClick={() => {navigate('/editor')}} id="edit">
                         <ion-icon name="create-outline"></ion-icon>
                     </button>
                 </div>

@@ -1,13 +1,13 @@
 import { format } from 'date-fns'; 
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     Form,
     Input,
     Button,
     DatePicker
   } from "antd";
-import { addEntry } from "../api_services/EntryService";
+import { addEntry, editEntry } from "../api_services/EntryService";
 
   const layout = {
     labelCol: { span: 5 },
@@ -17,7 +17,7 @@ import { addEntry } from "../api_services/EntryService";
     wrapperCol: { offset: 8, span: 16 }
   };
   
-export default function Demo() {
+export default function Demo(props) {
   const [newTitle, setNewTitle] = useState(''); 
   const [newLocation, setNewLocation] = useState(''); 
   const [newStartDate, setNewStartDate] = useState(''); 
@@ -25,6 +25,9 @@ export default function Demo() {
   const [newDescription, setNewDescription] = useState('');
   const [newGoogleMapsUrl, setNewGoogleMapsUrl] = useState(''); 
   const [newImgUrl, setNewImgUrl] = useState(''); 
+
+  const navigate = useNavigate(); 
+  const currentDate = new Date().toString(); 
 
   const handleAddEntry = () => {
     addEntry({
@@ -37,7 +40,7 @@ export default function Demo() {
       newImgUrl
     }); 
 
-    // fetch cars here? 
+    navigate('/home'); 
   };
 
   const [form] = Form.useForm();
@@ -47,8 +50,7 @@ export default function Demo() {
   };
 
   const onFinish = (values) => {
-    console.log("Success:", values);
-    // fetch cars here? 
+    handleAddEntry(values);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -59,17 +61,26 @@ export default function Demo() {
     <Form
       {...layout}
       form={form}
-      initialValues={{ remember: true }}
+      initialValues={
+        {
+          // update these initial values to the editedEntryId received from props in Editor.jsx 
+          "title": "T",
+          "location": "L",
+          "description": "D",
+          "googleMapsUrl": "G",
+          "imgUrl": "I"
+        }
+      }
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
-      <Form.Item name="form-title" label="Title" rules={[{ required: true, message: "Title is required" }]}>
+      <Form.Item name="title" label="Title" rules={[{ required: true, message: "Title is required" }]}>
         <Input 
           onChange={(event) => {setNewTitle(event.target.value)}}/>
       </Form.Item>
 
       <Form.Item
-        name="Location"
+        name="location"
         label="Location"
         rules={[{ required: true, message: "Location is required" }]}
       >
@@ -84,13 +95,17 @@ export default function Demo() {
           rules={[{ required: true, message: "Start Date is required" }]}
       >
         <DatePicker
-          onChange={(event) => {setNewStartDate(format(event.$d, 'yyyy-MM-dd'))}} />
+          onChange={(event) => {
+            setNewStartDate(format(event.$d, 'yyyy-MM-dd'))
+            console.log(event.$d)
+            }} />
         
       </Form.Item>
 
       <Form.Item 
           name="endDate"
           label="End Date"
+          rules={[{ required: true, message: "End Date is required" }]}
       >
         <DatePicker 
           onChange={(event) => {setNewEndDate(format(event.$d, 'yyyy-MM-dd'))}}
@@ -115,13 +130,16 @@ export default function Demo() {
       </Form.Item>
 
       <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit" onClick={handleAddEntry}>
-          <Link to='/home'>Submit</Link>
+          <Button type="primary" htmlType="submit">
+          Save
           </Button>
       </Form.Item>
       <Form.Item {...tailLayout}>
         <Button htmlType="button" onClick={onReset}>
           Reset
+        </Button>
+        <Button htmlType="button">
+        <Link to='/home'>Cancel</Link>
         </Button>
       </Form.Item>
     </Form>

@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function MainContent() {
     const [entries, setEntries] = useState([]); 
+    const [editEntryId, setEditEntryId] = useState(null)
 
     useEffect(() => {
         fetchEntries(); 
@@ -14,7 +15,12 @@ export default function MainContent() {
 
     const fetchEntries = async () => {
         const fetchedEntries = await getUserEntries(); 
+        console.log(fetchedEntries)
         setEntries(fetchedEntries); 
+    }
+
+    const fetchEditEntry = async () => {
+        
     }
 
     const handleDeleteEntry = async (entryId) => {
@@ -24,6 +30,7 @@ export default function MainContent() {
     }
 
     const handleEditEntry = async (entryId) => {
+        setEditEntryId(entryId); 
         await editEntry(entryId); 
 
         fetchEntries(); 
@@ -50,7 +57,7 @@ export default function MainContent() {
             <Nav />
             <div>
                 {dataSet}
-                <Link to="/editor" id="addEntry">Add New Entry</Link>
+                <Link to="/addEntry" id="addEntry">Add New Entry</Link>
             </div>
         </>
     )

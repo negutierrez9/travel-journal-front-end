@@ -1,18 +1,18 @@
 import React from "react"; 
 import Nav from './Nav.jsx'
 import Form from './Form.jsx'
-import './Editor.css'
+import './NewEntry.css'
 
-function Editor(props) {
-    const addEntry = () => {
-        console.log('Added Entry!')
-    }
+// pass in editEntry here, then pass props into form 
+
+function Editor() {
 
     return (
         <>
             <Nav />
-            <h1 className="editor--title">Add Entry</h1>
-            <Form />
+            <h1 className="editor--title">Edit Entry</h1>
+            <Form 
+            />
         </>
     )
 }
