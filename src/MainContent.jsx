@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 
 export default function MainContent() {
     const [entries, setEntries] = useState([]); 
-    const [editEntryId, setEditEntryId] = useState(null)
 
     useEffect(() => {
         fetchEntries(); 
@@ -15,24 +14,12 @@ export default function MainContent() {
 
     const fetchEntries = async () => {
         const fetchedEntries = await getUserEntries(); 
-        console.log(fetchedEntries)
         setEntries(fetchedEntries); 
-    }
-
-    const fetchEditEntry = async () => {
-        
-    }
+    };
 
     const handleDeleteEntry = async (entryId) => {
         await deleteEntry(entryId); 
-
-        fetchEntries(); 
-    }
-
-    const handleEditEntry = async (entryId) => {
-        setEditEntryId(entryId); 
-        await editEntry(entryId); 
-
+        console.log(`Entry Id:`, entryId)
         fetchEntries(); 
     }
 
@@ -48,7 +35,6 @@ export default function MainContent() {
             description={item.description}
             imgUrl={item.imgUrl}
             onDelete={handleDeleteEntry}
-            onEdit={handleEditEntry}
         />
     }) : null;
 
@@ -57,7 +43,7 @@ export default function MainContent() {
             <Nav />
             <div>
                 {dataSet}
-                <Link to="/addEntry" id="addEntry">Add New Entry</Link>
+                <Link to="/addEntry" id="addEntry" >Add New Entry</Link>
             </div>
         </>
     )

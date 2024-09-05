@@ -18,16 +18,18 @@ import { addEntry, editEntry } from "../api_services/EntryService";
   };
   
 export default function Demo(props) {
-  const [newTitle, setNewTitle] = useState(''); 
-  const [newLocation, setNewLocation] = useState(''); 
-  const [newStartDate, setNewStartDate] = useState(''); 
-  const [newEndDate, setNewEndDate] = useState(''); 
-  const [newDescription, setNewDescription] = useState('');
-  const [newGoogleMapsUrl, setNewGoogleMapsUrl] = useState(''); 
-  const [newImgUrl, setNewImgUrl] = useState(''); 
+  const entryId = props.id
+  const [editEntryStatus, setEditEntryStatus] = useState(true)
+
+  const [newTitle, setNewTitle] = editEntryStatus ? useState(props.currentTitle) : useState(''); 
+  const [newLocation, setNewLocation] = editEntryStatus ? useState(props.currentLocation) : useState(''); 
+  const [newStartDate, setNewStartDate] = editEntryStatus ? useState(props.currentStartDate) : useState(''); 
+  const [newEndDate, setNewEndDate] = editEntryStatus ? useState(props.currentEndDate) : useState(''); 
+  const [newDescription, setNewDescription] = editEntryStatus ? useState(props.currentDescription) : useState('');
+  const [newGoogleMapsUrl, setNewGoogleMapsUrl] = editEntryStatus ? useState(props.currentGoogleMapsUrl) : useState(''); 
+  const [newImgUrl, setNewImgUrl] = editEntryStatus ? useState(props.currentImgUrl) : useState(''); 
 
   const navigate = useNavigate(); 
-  const currentDate = new Date().toString(); 
 
   const handleAddEntry = () => {
     addEntry({
@@ -43,6 +45,20 @@ export default function Demo(props) {
     navigate('/home'); 
   };
 
+  const handleEditEntry = () => {
+    editEntry(entryId, {
+      newTitle,
+      newLocation,
+      newStartDate,
+      newEndDate,
+      newDescription,
+      newGoogleMapsUrl,
+      newImgUrl
+    }); 
+
+    navigate('/home'); 
+  }
+
   const [form] = Form.useForm();
 
   const onReset = () => {
@@ -50,7 +66,7 @@ export default function Demo(props) {
   };
 
   const onFinish = (values) => {
-    handleAddEntry(values);
+    editEntryStatus ? handleEditEntry(values) : handleAddEntry(values);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -62,14 +78,13 @@ export default function Demo(props) {
       {...layout}
       form={form}
       initialValues={
-        {
-          // update these initial values to the editedEntryId received from props in Editor.jsx 
-          "title": "T",
-          "location": "L",
-          "description": "D",
-          "googleMapsUrl": "G",
-          "imgUrl": "I"
-        }
+        editEntryStatus ? {
+          "title": props.currentTitle,
+          "location": props.currentLocation,
+          "description": props.currentDescription,
+          "googleMapsUrl": props.currentGoogleMapsUrl,
+          "imgUrl": props.currentImgUrl
+        } : {}
       }
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
@@ -97,7 +112,6 @@ export default function Demo(props) {
         <DatePicker
           onChange={(event) => {
             setNewStartDate(format(event.$d, 'yyyy-MM-dd'))
-            console.log(event.$d)
             }} />
         
       </Form.Item>
@@ -108,8 +122,9 @@ export default function Demo(props) {
           rules={[{ required: true, message: "End Date is required" }]}
       >
         <DatePicker 
-          onChange={(event) => {setNewEndDate(format(event.$d, 'yyyy-MM-dd'))}}
-          />
+          onChange={(event) => {
+            setNewEndDate(format(event.$d, 'yyyy-MM-dd')
+            )}} />
       </Form.Item>
 
       <Form.Item name="description" label="Description">

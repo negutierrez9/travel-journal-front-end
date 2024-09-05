@@ -12,7 +12,6 @@ export const addEntry = async (body) => {
     });
 
     const data = await response.json(); 
-    console.log('data', data)
     return data; 
 }
 
@@ -42,14 +41,27 @@ export const deleteEntry = async (entryId) => {
     return data; 
 }
 
-export const editEntry = async (entryId) => {
-    const response = await fetch(`${API_URL}/home/${entryId}`, {
+export const editEntry = async (entryId, body) => {
+    const response = await fetch(`${API_URL}/home/editor/${entryId}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${getJwt()}`
         }, 
         body: JSON.stringify(body)
+    });
+
+    const data = await response.json(); 
+
+    return data; 
+}
+
+export const getEditedEntry = async (entryId) => {
+    const response = await fetch(`${API_URL}/home/editor/${entryId}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${getJwt()}`
+        } 
     });
 
     const data = await response.json(); 

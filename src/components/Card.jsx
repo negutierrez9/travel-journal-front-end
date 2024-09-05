@@ -9,9 +9,9 @@ export default function Card(props) {
         await props.onDelete(props.id)
     }
 
-    const handleEditEntry = async () => {
-        await props.onEdit(props.id)
-    }
+    // const handleEditEntry = async () => {
+    //     await props.onEdit(props.id)
+    // }
 
     const navigate = useNavigate(); 
 
@@ -25,7 +25,7 @@ export default function Card(props) {
                     <ion-icon name="location"></ion-icon>
                     <h3 id="location">{props.location}</h3>
                     <a href={props.googleMapsUrl} id="googleMapsUrl">View on Google Maps</a>
-                    <button onClick={() => {navigate('/editor')}} id="edit">
+                    <button onClick={() => {navigate(`editor/${props.id}`)}} id="edit">
                         <ion-icon name="create-outline"></ion-icon>
                     </button>
                 </div>
